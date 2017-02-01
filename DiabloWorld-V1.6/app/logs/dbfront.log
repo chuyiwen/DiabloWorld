@@ -1,0 +1,78 @@
+[2015-08-18 17:28:35.152000]
+ERROR
+	Traceback (most recent call last):
+[2015-08-18 17:28:35.152000]
+ERROR
+	  File "appmain.py", line 27, in <module>
+[2015-08-18 17:28:35.153000]
+ERROR
+	    ser.config(serconfig, dbconfig=dbconf, memconfig=memconf,masterconf=masterconf)
+[2015-08-18 17:28:35.154000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\server\server.py", line 103, in config
+[2015-08-18 17:28:35.156000]
+ERROR
+	    __import__(app)
+[2015-08-18 17:28:35.158000]
+ERROR
+	  File "E:\Projects\DiabloWorld\Server\1.6\DiabloWorld-V1.6\app\dbfrontserver.py", line 9, in <module>
+[2015-08-18 17:28:35.159000]
+ERROR
+	    initconfig.loadModule()
+[2015-08-18 17:28:35.159000]
+ERROR
+	  File "E:\Projects\DiabloWorld\Server\1.6\DiabloWorld-V1.6\app\dbfront\initconfig.py", line 25, in loadModule
+[2015-08-18 17:28:35.161000]
+ERROR
+	    CheckMemDB(1800)
+[2015-08-18 17:28:35.163000]
+ERROR
+	  File "E:\Projects\DiabloWorld\Server\1.6\DiabloWorld-V1.6\app\dbfront\dataloader.py", line 30, in CheckMemDB
+[2015-08-18 17:28:35.164000]
+ERROR
+	    MAdminManager().checkAdmins()
+[2015-08-18 17:28:35.166000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\madminanager.py", line 37, in checkAdmins
+[2015-08-18 17:28:35.167000]
+ERROR
+	    admin.checkAll()
+[2015-08-18 17:28:35.171000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\mmode.py", line 270, in checkAll
+[2015-08-18 17:28:35.172000]
+ERROR
+	    mm.checkSync(timeout=self._timeout)
+[2015-08-18 17:28:35.181000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\mmode.py", line 130, in checkSync
+[2015-08-18 17:28:35.183000]
+ERROR
+	    self.syncDB()
+[2015-08-18 17:28:35.185000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\mmode.py", line 112, in syncDB
+[2015-08-18 17:28:35.187000]
+ERROR
+	    util.UpdateWithDict(tablename, props, prere)
+[2015-08-18 17:28:35.190000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\util.py", line 157, in UpdateWithDict
+[2015-08-18 17:28:35.192000]
+ERROR
+	    sql = forEachUpdateProps(tablename, props, prere)
+[2015-08-18 17:28:35.195000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\util.py", line 54, in forEachUpdateProps
+[2015-08-18 17:28:35.197000]
+ERROR
+	    pro = FormatUpdateStr(props)
+[2015-08-18 17:28:35.200000]
+ERROR
+	  File "D:\Python27\lib\site-packages\firefly-1.3.3dev_r0-py2.7.egg\firefly\dbentrust\util.py", line 46, in FormatUpdateStr
+[2015-08-18 17:28:35.201000]
+ERROR
+	    sqlstr = " `%s`='%s',"%(_item[0],str(_item[1]).replace("'", "\\'"))
+[2015-08-18 17:28:35.204000]
+ERROR
+	UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-11: ordinal not in range(128)
