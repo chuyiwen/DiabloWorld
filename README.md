@@ -2,7 +2,7 @@
 
 ---
 
-## Firefly在CentOS下的安装
+## Firefly在CentOS下的安装  
 > * 安装Python
 `下载Python-2.7.11`  
 wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz  
@@ -24,16 +24,15 @@ ln -s /usr/bin/python2.7 /usr/bin/python
 改成  
 \#!/usr/bin/python2.6.6
 > * 安装MySQL
-> * 安装memcached
+> * 安装memcached  
 `启动命令`  
 memcached -u root -d
 > * 安装pip：python `get-pip.py`
-> * 将register.py放到D盘然后：python `register.py`
 > * pip install `twisted`
 > * pip install `python-memcached`
 > * pip install `DBUtils`
 > * pip install `affinity`
-> * pip install `MySQL-python`
+> * pip install `MySQL-python`  
 `如果发生错误`  
 yum install python-devel  
 yum install mysql-devel
