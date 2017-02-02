@@ -1,45 +1,45 @@
-# Firefly·þÎñÆ÷¿ò¼Ü°²×°ºÍÊ¹ÓÃ
+# FireflyæœåŠ¡å™¨æ¡†æž¶å®‰è£…å’Œä½¿ç”¨
 
 ---
 
-## FireflyÔÚCentOSÏÂµÄ°²×°
-> * °²×°Python
-`ÏÂÔØPython-2.7.11`
-wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz
-`½âÑ¹²¢½øÈëÄ¿Â¼`
-tar zxvf Python-2.7.11.tgz
-cd Python-2.7.11
-`±àÒë°²×°`
+## Fireflyåœ¨CentOSä¸‹çš„å®‰è£…
+> * å®‰è£…Python
+`ä¸‹è½½Python-2.7.11` 
+wget https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz 
+`è§£åŽ‹å¹¶è¿›å…¥ç›®å½•` 
+tar zxvf Python-2.7.11.tgz 
+cd Python-2.7.11 
+`ç¼–è¯‘å®‰è£…` 
 ./configure 
-make all
-make install
-make clean
-`½¨Á¢ÈíÁ¬½Ó£¬Ê¹ÏµÍ³Ä¬ÈÏµÄpythonÖ¸Ïòpython2.7`
-mv /usr/bin/python /usr/bin/python2.6.6
-ln -s /usr/bin/python2.7 /usr/bin/python
-`½â¾öÏµÍ³ Python ÈíÁ´½ÓÖ¸Ïò Python2.7 °æ±¾ºó£¬ÒòÎªyumÊÇ²»¼æÈÝPython` 2.7µÄ£¬ËùÒÔyum²»ÄÜÕý³£¹¤×÷£¬ÎÒÃÇÐèÒªÖ¸¶¨yumµÄPython°æ±¾ 
+make all 
+make install 
+make clean 
+`å»ºç«‹è½¯è¿žæŽ¥ï¼Œä½¿ç³»ç»Ÿé»˜è®¤çš„pythonæŒ‡å‘python2.7` 
+mv /usr/bin/python /usr/bin/python2.6.6 
+ln -s /usr/bin/python2.7 /usr/bin/python 
+`è§£å†³ç³»ç»Ÿ Python è½¯é“¾æŽ¥æŒ‡å‘ Python2.7 ç‰ˆæœ¬åŽï¼Œå› ä¸ºyumæ˜¯ä¸å…¼å®¹Python`  2.7çš„ï¼Œæ‰€ä»¥yumä¸èƒ½æ­£å¸¸å·¥ä½œï¼Œæˆ‘ä»¬éœ€è¦æŒ‡å®šyumçš„Pythonç‰ˆæœ¬ 
 \#vi /usr/bin/yum 
-½«ÎÄ¼þÍ·²¿µÄ 
+å°†æ–‡ä»¶å¤´éƒ¨çš„ 
 \#!/usr/bin/python 
-¸Ä³É 
+æ”¹æˆ 
 \#!/usr/bin/python2.6.6
-> * °²×°MySQL
-> * °²×°memcached
-`Æô¶¯ÃüÁî`
+> * å®‰è£…MySQL
+> * å®‰è£…memcached
+`å¯åŠ¨å‘½ä»¤` 
 memcached -u root -d
-> * °²×°pip£ºpython `get-pip.py`
-> * ½«register.py·Åµ½DÅÌÈ»ºó£ºpython `register.py`
+> * å®‰è£…pipï¼špython `get-pip.py`
+> * å°†register.pyæ”¾åˆ°Dç›˜ç„¶åŽï¼špython `register.py`
 > * pip install `twisted`
 > * pip install `python-memcached`
 > * pip install `DBUtils`
 > * pip install `affinity`
 > * pip install `MySQL-python`
-`Èç¹û·¢Éú´íÎó`
-yum install python-devel
+`å¦‚æžœå‘ç”Ÿé”™è¯¯` 
+yum install python-devel 
 yum install mysql-devel
-> * °²×°Firefly£¬¿ÉÒÔpip install `firefly`
+> * å®‰è£…Fireflyï¼Œå¯ä»¥pip install `firefly`
 
-## FireflyÔÚCentOSÏÂµÄÊ¹ÓÃ
+## Fireflyåœ¨CentOSä¸‹çš„ä½¿ç”¨
 > * firefly-admin.py createproject Test
 > * cd Test
 > * python startmaster.py
