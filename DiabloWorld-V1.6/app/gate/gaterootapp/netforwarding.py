@@ -25,33 +25,35 @@ def forwarding(key,dynamicId,data):
             return
         if oldvcharacter.getLocked():#判断角色对象是否被锁定
             return
-        node = VCharacterManager().getNodeByClientId(dynamicId)
-        return GlobalObject().root.callChild(node,key,dynamicId,data)
+        node = VCharacterManager().getNodeByClientId(dynamicId)  # 节点id
+        return GlobalObject().root.callChild(node,key,dynamicId,data)  # 调用node
     
 
 @rootserviceHandle
 def pushObject(topicID,msg,sendList):
     """
+    添加消息到 net
     """
-    GlobalObject().root.callChild("net","pushObject",topicID,msg,sendList)
+    GlobalObject().root.callChild("net","pushObject",topicID,msg,sendList)  # 调用net
     
 @rootserviceHandle
 def opera_player(pid,oprea_str):
     """
     """
-    vcharacter = VCharacterManager().getVCharacterByCharacterId(pid)#vcharacter是虚拟角色，VCharacterManager()虚拟角色管理器，{角色id:虚拟角色实例}
-    if not vcharacter:
+    # vcharacter是虚拟角色，VCharacterManager()虚拟角色管理器，{角色id:虚拟角色实例}
+    vcharacter = VCharacterManager().getVCharacterByCharacterId(pid)
+    if not vcharacter:  # 没有管理器
         node = "game1"
-    else:
+    else:  # 已存在，直接获取
         node = vcharacter.getNode()
-    GlobalObject().root.callChild(node,99,pid,oprea_str)
+    GlobalObject().root.callChild(node,99,pid,oprea_str)  # 调用node
     
 
 def SavePlayerInfoInDB(dynamicId):
     '''将玩家信息写入数据库'''
     vcharacter = VCharacterManager().getVCharacterByClientId(dynamicId)
     node = vcharacter.getNode()
-    d = GlobalObject().root.callChild(node,2,dynamicId)
+    d = GlobalObject().root.callChild(node,2,dynamicId)  # 调用node
     return d
 
 def SaveDBSuccedOrError(result,vcharacter):
@@ -70,8 +72,8 @@ def dropClient(deferResult,dynamicId,vcharacter):
     if node:#角色在场景中的处理
         SceneSerManager().dropClient(node, dynamicId)
         
-    VCharacterManager().dropVCharacterByClientId(dynamicId)
-    UsersManager().dropUserByDynamicId(dynamicId)
+    VCharacterManager().dropVCharacterByClientId(dynamicId)  # 从管理器中移除
+    UsersManager().dropUserByDynamicId(dynamicId)  # 从用户列表中移除
 
 @rootserviceHandle
 def netconnlost(dynamicId):

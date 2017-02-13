@@ -18,17 +18,17 @@ class BattleSide(object):
                  preDict = {'extVitper':1,'extStrper':1,
                             'extDexper':1,'extWisper':1,'extSpiper':1}):
         '''初始化战斗方'''
-        self.matrixType = matrixType
+        self.matrixType = matrixType  # 战斗方
         self.preDict = preDict
         self.members = []
         self.matrixSetting = {}
         self.lord = members[0].baseInfo.id#主将的ID
-        if members[0].getCharacterType()==1 and matrixType==PLAYER_PET:
-            player = members[0]
+        if members[0].getCharacterType()==1 and matrixType==PLAYER_PET:  # PLAYER_PET 类型
+            player = members[0]  # 玩家
             self.matrixType = PLAYER_PET
             self.members = []
             for eyeNo in range(1,10):
-                memID = player.matrix._matrixSetting.get('eyes_%d'%eyeNo)
+                memID = player.matrix._matrixSetting.get('eyes_%d'%eyeNo)  # 得到阵法对应位置的id
                 if memID<0:
                     continue
                 if not memID:
@@ -45,14 +45,14 @@ class BattleSide(object):
                     pet = PlayerCharacter.PlayerCharacter(memID)
                     self.members.append(pet)
                     self.matrixSetting[memID] = eyeNo
-        elif matrixType==PLAYER_PLAYER:
+        elif matrixType==PLAYER_PLAYER:  # PLAYER_PLAYER 类型
             self.members = members
             self.matrixSetting = matrixSetting
-            if not matrixSetting:
+            if not matrixSetting:  # 没有阵法位置表
                 self.autoPosition()
-        else:
+        else:  # MONSTER_MONSTER 类型
             self.members = members
-            if state and not self.matrixSetting:
+            if state and not self.matrixSetting:  # 没有阵法位置表
                 self.autoPosition()
             else:
                 self.matrixSetting = matrixSetting
@@ -60,6 +60,7 @@ class BattleSide(object):
     def autoPosition(self):
         '''自动更新阵法位置
         '''
+        # rule 是 固定的？
         rule = [9,8,7,6,4,3,2,1,5]
         for index in range(len(self.members)):
             character = self.members[index]
@@ -68,7 +69,7 @@ class BattleSide(object):
         
     def setMatrixPositionBatch(self,rule):
         '''批量设置阵法的位置'''
-        for index in range(len(rule)):
+        for index in range(len(rule)):  # 根据 rule 设置阵法的位置
             pos = rule[index]
             character = self.members[index]
             self.matrixSetting[character.baseInfo.id] = pos
@@ -82,7 +83,7 @@ class BattleSide(object):
         '''获取战斗方成员信息'''
         fighters = []
         for member in self.members:
-            data = member.getFightData()
+            data = member.getFightData()  # 获取怪物战斗数据
             fighters.append(data)
         return fighters
     

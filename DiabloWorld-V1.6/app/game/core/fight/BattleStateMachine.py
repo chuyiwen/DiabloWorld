@@ -29,7 +29,7 @@ class BattleStateMachine:
         if not self.StatePool.has_key(targetId):
             self.StatePool[targetId] = []
         bufflist = [buff.getID() for buff in self.StatePool[targetId]]
-        goaldamage = self.buffListOffset(buffId, bufflist, executor, targetId)
+        goaldamage = self.buffListOffset(buffId, bufflist, executor, targetId)  # buff之间的效果触发
         return goaldamage
         
     def buffListOffset(self,newbuff,buffList,actorId,enemyId):
@@ -44,45 +44,45 @@ class BattleStateMachine:
             if not offbuffId:
                 break
             damage = 0
-            offsetinfo = dbSkill.BUFF_BUFF.get(offbuffId,{})
+            offsetinfo = dbSkill.BUFF_BUFF.get(offbuffId,{})  # BUFF_BUFF buff和buff直接的效果配置
             offsetEffect = offsetinfo.get(newbuff)
             newbuff = offsetEffect['nbuffId']
             nstack = offsetEffect['nstack']
-            oldstack = self.getBuffStackOnTarget(enemyId, offbuffId)
+            oldstack = self.getBuffStackOnTarget(enemyId, offbuffId)  # 获取角色身上的buff的层叠数
             buffList.remove(offbuffId)
-            self.clearBuffById(enemyId, offbuffId)
-            actor = self.getTargetAttrWithBuf(actorId)
-            enemy = self.getTargetAttrWithBuf(enemyId)
+            self.clearBuffById(enemyId, offbuffId)  # 根据buff的ID清除buff
+            actor = self.getTargetAttrWithBuf(actorId)  # 获取角色的伴随buff后的属性
+            enemy = self.getTargetAttrWithBuf(enemyId)  # 获取角色的伴随buff后的属性
             if offsetEffect['effect']:
                 exec(offsetEffect['effect'])
             goaldamage += damage
-        self.addNewBuff(enemyId, newbuff, actorId, nstack)
+        self.addNewBuff(enemyId, newbuff, actorId, nstack)  # 添加新的buff
 
         return goaldamage
     
     def addNewBuff(self,targetId,buffId,executor,stack):
         '''添加新的buff
         '''
-        newbuff = StateBuffer(buffId, holder = targetId, executor = executor)
+        newbuff = StateBuffer(buffId, holder = targetId, executor = executor)  # Buff 状态
         newbuff.setStack(stack)
         buffIdlist = [buff.getID() for buff in self.StatePool[targetId]]
         if buffId in buffIdlist:#存在同样的buff时
             for buff in self.StatePool[targetId]:
                 tbuffId = buff.getID()
-                if buffId == tbuffId:
-                    buff.addStack()
-        else:
+                if buffId == tbuffId:  # 同一种 buff
+                    buff.addStack()  # 相同的 buff 升级
+        else:  # 不存在该 buff
             ntype = newbuff.getBuffType()
             state = 0
             for buff in self.StatePool[targetId]:
                 tbuffId = buff.getID()
                 tbufftype = buff.getBuffType()
                 tstack = buff.getStack()
-                if ntype == tbufftype:
+                if ntype == tbufftype:  # 同类型 buff
                     state = 1
-                    if tstack>stack:
+                    if tstack>stack:  # 原来的比较高级，buff 在原来的基础上升级
                         buff.addStack()
-                    else:
+                    else:  # 新的高级，buff 直接替换成新的
                         self.StatePool[targetId].remove(buff)
                         self.StatePool[targetId].append(newbuff)
             if not state:
@@ -111,18 +111,20 @@ class BattleStateMachine:
         '''获取角色的伴随buff后的属性
         @param target: int 目标在战场中的id
         '''
-        enemy = copy.deepcopy(self.owner.fighters[target])
+        # 深拷贝，复制后新旧属性不在同一内存
+        enemy = copy.deepcopy(self.owner.fighters[target])  # 战斗成员数据
         battleId = enemy['chaBattleId']
         side = battleId/10
         if side==1:
-            lord = self.owner.alord
+            lord = self.owner.alord  # 主攻方主将
         else:
-            lord = self.owner.plord
+            lord = self.owner.plord  # 被攻击方主将
         lordattr = self.owner.fighters[lord]
         if lordattr['died'] or target==lord:
             EquipAttr = {}
         else:
             EquipAttr = lordattr['equip']
+        # 成员总数据 = 成员数据 + 装备数据
         enemy['chaTotalHp'] = (enemy['chaTotalHp']+EquipAttr.get('MaxHp',0))*\
                                 (1+EquipAttr.get('MaxHpPercen',0))
         enemy['physicalAttack'] = (enemy['physicalAttack']+EquipAttr.get('PhyAtt',0))*\
@@ -133,12 +135,12 @@ class BattleStateMachine:
         enemy['critRate'] = enemy['critRate']+EquipAttr.get('CriRate',0)
         enemy['dodgeRate'] = enemy['dodgeRate']+EquipAttr.get('Dodge',0)
         enemy['speed'] = enemy['speed']+EquipAttr.get('speed',0)
-        if not self.StatePool.has_key(target):
+        if not self.StatePool.has_key(target):  # 目标还没有状态池
             self.StatePool[target] = []
-        for buff in self.StatePool[target]:
-            executor = buff.getExecutor()
-            actor = self.owner.fighters[executor]
-            enemy = buff.getBuffEffect(actor,enemy)
+        for buff in self.StatePool[target]:  # 遍历目标的 buff
+            executor = buff.getExecutor()  # 获取施加者的战场id
+            actor = self.owner.fighters[executor]  # 施加者数据
+            enemy = buff.getBuffEffect(actor,enemy)  # 获取buff或者debuff效果
         return enemy
     
     def getSkillAddition(self,targetId,skill):
@@ -153,10 +155,10 @@ class BattleStateMachine:
         for buff in self.StatePool[targetId]:
             buffId = buff.getID()
             stack = buff.getStack()
-            addinfo = dbSkill.BUFF_SKILL.get(buffId,{})
+            addinfo = dbSkill.BUFF_SKILL.get(buffId,{})  # 获取buff对技能加成
             addition = addinfo.get(skill)
             if addition:
-                damageAddition *= (1+addition*stack)
+                damageAddition *= (1+addition*stack)  # 计算效果
         return damageAddition
         
     def getTargetBuffList(self,target):
@@ -195,8 +197,8 @@ class BattleStateMachine:
             executor = buff.getExecutor()
             actor = self.getTargetAttrWithBuf(executor)
             enemy = self.getTargetAttrWithBuf(target)
-            _damage1 = buff.getdotHotEffect(actor,enemy)
-            _damage2 = buff.getdotTriggeredHotEffect(actor,enemy)
+            _damage1 = buff.getdotHotEffect(actor,enemy)  # 获取dot或者hot效果
+            _damage2 = buff.getdotTriggeredHotEffect(actor,enemy)  # 获取dot或者hot效果
             if _damage1 or _damage2:
                 if damage is None:
                     damage = 0
@@ -315,7 +317,7 @@ class BattleStateMachine:
                     self.clearBuffById(target, buff.getID())
         
     def buffCDProcess(self,target):
-        '''buff的CD处理
+        '''所有buff的CD处理
         @param target: int 目标的id
         '''
         tag = False

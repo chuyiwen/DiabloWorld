@@ -5,9 +5,10 @@ Created on 2013-3-19
 @author: lan
 '''
 from app.game.gatenodeservice import remoteserviceHandle
-from app.game.appinterface import firend
+from app.game.appinterface import firend  # 导入 friend
 import json
 
+# 302
 @remoteserviceHandle
 def GetFriendList_302(dynamicId,request_proto):
     '''获取好友的排行列表
@@ -19,7 +20,7 @@ def GetFriendList_302(dynamicId,request_proto):
     response = firend.GetFriendList(dynamicId, characterId, tag, index)
     return json.dumps(response)
     
-
+# 221
 @remoteserviceHandle
 def GetPlayerInfo_221(dynamicId,request_proto):
     '''获取角色的信息 1角色自身 2好友 3宠物
@@ -30,7 +31,8 @@ def GetPlayerInfo_221(dynamicId,request_proto):
     tid = argument.get('tid')
     data = firend.GetSingleCharacterInfo(dynamicId, characterId, chtype, tid)
     return json.dumps(data)
-    
+
+ # 2301
 @remoteserviceHandle
 def GuYongHaoYou_2301(dynamicId,request_proto):
     '''雇佣好友
@@ -40,7 +42,8 @@ def GuYongHaoYou_2301(dynamicId,request_proto):
     tid = argument.get('friendid')
     data = firend.GuYongHaoYou(dynamicId,characterId,tid)
     return json.dumps(data)
-    
+
+# 2309
 @remoteserviceHandle
 def GuYongRecord_2309(dynamicId,request_proto):
     '''获取雇用的记录

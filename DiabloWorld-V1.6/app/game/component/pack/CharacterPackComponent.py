@@ -328,7 +328,7 @@ class CharacterPackageComponent(Component):
         return {'result':True,'data':{'itemlist':suipianList}}
         
     def getOneItemInfo(self,itemid):
-        '''获取当个物品的信息
+        '''获取单个物品的信息
         '''
         i_item = self._equipmentSlot.getItemInfoByItemid(itemid)
         if not i_item:

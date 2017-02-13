@@ -14,7 +14,7 @@ def GetAllPetListFormatForWeixin(dynamicId,characterId):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    petList = player.pet.FormatPetList()
+    petList = player.pet.FormatPetList()  # 格式化所有宠物的信息
     return {'result':True,'data':petList}
     
     
@@ -24,7 +24,7 @@ def GetCharacterMatrixInfo(dynamicId,characterId):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    matrixinfo = player.matrix.FormatMatrixInfoForWeixin()
+    matrixinfo = player.matrix.FormatMatrixInfoForWeixin()  # 格式化角色的阵法设置信息
     return {'result':True,'data':matrixinfo}
     
 
@@ -33,7 +33,7 @@ def GetPetListInfo(dynamicId,characterId):
     player = PlayersManager().getPlayerByID(characterId)
     if not player:
         return {'result':False,'message':u""}
-    petList = player.pet.getCharacterPetListInfo()
+    petList = player.pet.getCharacterPetListInfo()  # 获取角色宠物列表
     return {'result':True,'data':petList}
 
 def GetPetMatrixList(dynamicId,characterId):
@@ -41,7 +41,7 @@ def GetPetMatrixList(dynamicId,characterId):
     player = PlayersManager().getPlayerByID(characterId)
     if not player:
         return {'result':False,'message':u""}
-    data = player.matrix.getMatrixListSetting()
+    data = player.matrix.getMatrixListSetting()  # 获取阵法列表设置
     return {'result':True,'data':data}
 
 def SettingMatrix(dynamicId,characterId,petId,chatype,operationType,fromPos,toPos):
@@ -49,15 +49,16 @@ def SettingMatrix(dynamicId,characterId,petId,chatype,operationType,fromPos,toPo
     player = PlayersManager().getPlayerByID(characterId)
     if not player:
         return {'result':False,'message':u""}
-    result = player.matrix.updateMatrix(petId,chatype,operationType,fromPos,toPos)
+    result = player.matrix.updateMatrix(petId,chatype,operationType,fromPos,toPos)  # 更新阵法位置信息
     return result
 
 def GetOnePetInfo(dynamicId,characterId, petId,masterId):
     '''获取单个武将的信息'''
+    # 这里的 masterId？？？ characterId就够了吧
     player = PlayersManager().getPlayerByID(characterId)
     if not player:
         return {'result':False,'message':u""}
-    toplayer = PlayersManager().getPlayerByID(masterId)
+    toplayer = PlayersManager().getPlayerByID(masterId)  # 根据角色id获取玩家角色实例
     if not toplayer:
         return {'result':False,'message':u""}
     else:
@@ -70,5 +71,5 @@ def SwallowPet(dynamicId, characterId,petid,tpetid):
     player = PlayersManager().getPlayerByID(characterId)
     if not player:
         return {'result':False,'message':u""}
-    result = player.pet.SwallowPet(petid,tpetid)
+    result = player.pet.SwallowPet(petid,tpetid)  # 武将吞噬
     return result

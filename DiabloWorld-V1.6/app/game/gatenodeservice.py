@@ -8,8 +8,8 @@ from firefly.server.globalobject import GlobalObject
 from firefly.utils.services import CommandService
 
 
-remoteservice = CommandService("gateremote")
-GlobalObject().remote['gate']._reference.addService(remoteservice)
+remoteservice = CommandService("gateremote")  # 远程服务节点
+GlobalObject().remote['gate']._reference.addService(remoteservice)  # 添加到 gate
 
 
 def remoteserviceHandle(target):

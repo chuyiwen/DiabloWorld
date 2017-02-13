@@ -8,18 +8,18 @@ from firefly.utils.singleton import Singleton
 
 class UsersManager:
 
-    __metaclass__ = Singleton
+    __metaclass__ = Singleton  # 单例
 
     def __init__(self):
-        self._users = {}
+        self._users = {}  # 用户列表
         
     def addUser(self, user):
         """添加一个用户
         """
-        if self._users.has_key(user.id):
-            self._users[user.id].disconnectClient()
-            self.dropUserByID(user.id)
-        self._users[user.id] = user
+        if self._users.has_key(user.id):  # 存在用户
+            self._users[user.id].disconnectClient()  # 先掉线
+            self.dropUserByID(user.id)  # 从列表中移除
+        self._users[user.id] = user  # 重新添加
 
     def getUserByID(self, uid):
         """根据ID获取用户信息
@@ -28,7 +28,7 @@ class UsersManager:
         
     def getUserByDynamicId(self,dynamicId):
         '''根据客户端的动态ID获取user实例'''
-        for user in self._users.values():
+        for user in self._users.values():  # 遍历用户列表
             if user.dynamicId==dynamicId:
                 return user
         return None
@@ -36,7 +36,7 @@ class UsersManager:
     def getUserByUsername(self, username):
         """根据用户名获取用户信息
         """
-        for k in self._users.values():
+        for k in self._users.values():  # 遍历用户列表
             if k.getNickName() == username:
                 return k
         return None

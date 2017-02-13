@@ -5,9 +5,10 @@ Created on 2013-3-18
 @author: lan (www.9miao.com)
 '''
 from app.game.gatenodeservice import remoteserviceHandle
-from app.game.appinterface import roleinfo
+from app.game.appinterface import roleinfo  # 导入 roleinfo
 import json
-    
+
+# 105
 @remoteserviceHandle
 def RoleInfo_105(dynamicId,request_proto):
     '''获取角色的状态栏信息

@@ -33,6 +33,7 @@ class CharacterMailListComponent(Component):
         return result
     
     def getPageCnd(self,responseMailType,limit=4):
+        '''获取总页码'''
         cnd = self.getMailCnd(responseMailType)
         pageCnd = math.ceil(float(cnd)/limit)
         if pageCnd == 0 :

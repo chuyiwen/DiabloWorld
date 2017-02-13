@@ -1,0 +1,60 @@
+{"frames": {
+
+"btn.png":
+{
+	"frame": {"x":2,"y":192,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"btn2.png":
+{
+	"frame": {"x":2,"y":138,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"f1.png":
+{
+	"frame": {"x":2,"y":104,"w":459,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":459,"h":32},
+	"sourceSize": {"w":459,"h":32}
+},
+"f2.png":
+{
+	"frame": {"x":2,"y":70,"w":459,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":459,"h":32},
+	"sourceSize": {"w":459,"h":32}
+},
+"f3.png":
+{
+	"frame": {"x":2,"y":36,"w":459,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":459,"h":32},
+	"sourceSize": {"w":459,"h":32}
+},
+"f4.png":
+{
+	"frame": {"x":2,"y":2,"w":459,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":459,"h":32},
+	"sourceSize": {"w":459,"h":32}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "kaichang.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9cc9862282c504aed3108fac1f22abb9:1/1$"
+}
+}

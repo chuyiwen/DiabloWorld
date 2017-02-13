@@ -8,14 +8,15 @@ from app.game.core.PlayersManager import PlayersManager
 
 def roleInfo(dynamicId,characterId):
     '''获取角色的状态栏信息
-    @param userId: int 用户id
+    @param dynamicId: int 用户id
     @param characterId: 角色的id 
     '''
     player = PlayersManager().getPlayerBydynamicId(dynamicId)
     if dynamicId != player.getDynamicId():
         return {'result':False,'message':""}
-    playerinfo = player.formatInfo()
+    playerinfo = player.formatInfo()  # 格式化角色基本信息
     responsedata = {'result':True,'message':'',
+                    # 设置角色状态数据
                     'data':{'characterId':playerinfo['id'],
                             'rolename':playerinfo['nickname'],
                             'level':playerinfo['level'],

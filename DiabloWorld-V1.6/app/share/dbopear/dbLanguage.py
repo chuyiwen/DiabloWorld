@@ -9,6 +9,7 @@ from MySQLdb.cursors import DictCursor
 
 def getAll():
     '''获取所有翻译信息'''
+    # id content（内容） txt（中文） typeid
     sql="SELECT * FROM tb_language"
     conn = dbpool.connection()
     cursor = conn.cursor(cursorclass=DictCursor)

@@ -1,0 +1,52 @@
+{"frames": {
+
+"blood.png":
+{
+	"frame": {"x":2,"y":969,"w":72,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":8},
+	"sourceSize": {"w":72,"h":8}
+},
+"blood128.png":
+{
+	"frame": {"x":2,"y":951,"w":128,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":16},
+	"sourceSize": {"w":128,"h":16}
+},
+"bound.png":
+{
+	"frame": {"x":149,"y":804,"w":74,"h":74},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":74},
+	"sourceSize": {"w":74,"h":74}
+},
+"bound145.png":
+{
+	"frame": {"x":2,"y":804,"w":145,"h":145},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":145,"h":145},
+	"sourceSize": {"w":145,"h":145}
+},
+"pkbg.png":
+{
+	"frame": {"x":2,"y":2,"w":480,"h":800},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":480,"h":800},
+	"sourceSize": {"w":480,"h":800}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "zhandou.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d391e635071bfe551f6320746a45073e:1/1$"
+}
+}

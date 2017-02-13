@@ -32,6 +32,7 @@ def deletePlayerFriend(characterId,friendId):
     '''删除角色好友
     @param friendId: int 好友编号
     '''
+    # 要根据 characterId 和 friendId 删除
     sql = 'delete from `tb_friend` where characterId=%d friendId = %d'%(characterId,friendId)
     conn = dbpool.connection()
     cursor = conn.cursor()
@@ -60,11 +61,16 @@ def getFirendListByFlg(pid,flg):
         return []
     listdata=[]
     for item in result:
-        listdata.append(item['playerId'])
+        listdata.append(item['playerId'])  # 将 id对应角色 放入列表
     return listdata
 
 def getFriendTopLevel(characterId,index,limit=20):
     '''获取好友的等级排行
+    WHERE `id`!=%d ORDER BY level LIMIT %d,%d
+    首先`id`!=%d 表示不能是自己
+    然后ORDER BY 默认根据升序排名 asc(升序) 或desc(降序)
+    最后LIMIT %d,%d 第一个参数是offset（偏移量），第二个参数是rows（行数）
+    即查找 level在 offset ~ offset + rows 之间的好友
     '''
     sql = "SELECT id,nickname,level,coin \
     FROM tb_character WHERE `id`!=%d ORDER BY level LIMIT %d,%d;"%(characterId,index,limit)
@@ -78,6 +84,8 @@ def getFriendTopLevel(characterId,index,limit=20):
 
 def getFriendTopGuanqia(characterId,index,limit=20):
     '''获取好友的关卡排行
+    level是mysql关键字，使用mysql保留字，需要使用反引号（``）
+    因此在建表时,不要用保留字作表名,字段名.可以加一个前缀标志加以区分
     '''
     sql = "SELECT id,nickname,`level`,coin FROM tb_character WHERE\
      `id`!=%d ORDER BY guanqia LIMIT %d,%d;"%(characterId,index,limit)
@@ -119,6 +127,9 @@ def UpdateGuYongState(characterId,tid,state):
     
 def addGuyongRecord(characterId,rolename,zyname,zyid,bresult,coinbound,huoli):
     '''添加雇用记录
+    @param: zyname: 攻打关卡的名称
+    @param: zyid: 攻打战役的id
+    @param: bresult: 战斗结果 1胜利 2失败
     '''
     sql = "INSERT INTO tb_guyong_record (characterId,\
     chaname,zyname,zyid,battleresult,coinbound,huoli) VALUES \
@@ -135,6 +146,7 @@ def addGuyongRecord(characterId,rolename,zyname,zyid,bresult,coinbound,huoli):
     return False
     
 def getGuyongRecord(characterId):
+    # DESC 降序 获取最近10次记录
     sql = "SELECT * FROM tb_guyong_record WHERE \
     characterId = %d ORDER BY reocrddate DESC LIMIT 0,10;"%(characterId)
     conn = dbpool.connection()
@@ -147,8 +159,8 @@ def getGuyongRecord(characterId):
     
 def getGuYongList(pid):
     '''获取角色的所有好友或者黑名单
-    @param pid: int 角色id
     '''
+    # 数据库这个表还没有建立...
     sql="SELECT playerId FROM tb_friend WHERE characterId=%s AND guyong=1"%(pid)
     conn = dbpool.connection()
     cursor = conn.cursor(cursorclass=DictCursor)

@@ -8,19 +8,20 @@ class PagePack:
     '''分页包裹'''
     def __init__(self,pageType,size=30):
         '''
-        @param items: [{'position':int,'wholeItem':{'porition':int,'itemComponent':Item Object}}]分页物品列表
+        @param items: [{'position':int,'wholeItem':{'position':int,'itemComponent':Item Object}}]分页物品列表
         @param _pageTyep: int 分页的类型
         '''
         self.items = []
         self._pageType = pageType
         self._tag = 0
-        self._size = size
+        self._size = size  # 每页数量
         
     def getSize(self):
         '''获取包裹大小'''
         return self._size
         
     def getItemList(self):
+        '''获取分页包裹全部物品信息'''
         return [{'position':item['position'],'itemComponent':item['wholeItem']['itemComponent']} for item in self.items]
         
     def getPageType(self):
@@ -37,7 +38,7 @@ class PagePack:
         @param itemComponent: Item Object 物品
         '''
         itemInfo={}
-        itemInfo['position'] = self._tag
+        itemInfo['position'] = self._tag  # 这里实现不是根据位置放，而是按顺序放，实际上玩家可以随意放
         itemInfo['wholeItem'] = wholeItem
         self.items.append(itemInfo)
         self._tag +=1
@@ -58,7 +59,7 @@ class PagePack:
         return ItemsInfo
     
     def getRealPosition(self,position):
-        '''获取物品在包裹中得真实位置'''
+        '''根据在包裹的位置获取物品'''
         for item in self.items:
             if item['position'] == position:
                 return item['wholeItem']['position']

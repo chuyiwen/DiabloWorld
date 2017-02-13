@@ -13,12 +13,12 @@ LEVEL_MAIL = {}#所有等级的邮件提示
 
 
 def forEachQueryProps(sqlstr, props):
-    '''遍历所要查询属性，以生成sql语句'''
-    if props == '*':
+    '''遍历所要查询属性，以生成sql语句，在本类中使用'''
+    if props == '*':  # 参数为 *
         sqlstr += ' *'
-    elif type(props) == type([0]):
+    elif type(props) == type([0]):  # 是个列表
         i = 0
-        for prop in props:
+        for prop in props:  # 组拼 sql 语句
             if(i == 0):
                 sqlstr += ' ' + prop
             else:
@@ -43,28 +43,29 @@ def getAllLevelMail():
     scenesInfo = {}
     for scene in result:
         scenesInfo[scene['level']] = scene
-    LEVEL_MAIL = scenesInfo
+    LEVEL_MAIL = scenesInfo  # 写入
     return scenesInfo
 
-
+# 根据 类型码 返回对应类型的数量
 def getPlayerMailCnd(characterId,mtype):
     '''获取角色邮件列表长度
     @param characterId: int 角色的ID
     @param type: int 邮件的分页类型
     '''
     cnd = 0
-    if mtype ==0:
+    if mtype ==0:  # 所有
         cnd = getPlayerAllMailCnd(characterId)
-    elif mtype ==1:
+    elif mtype ==1:  # 系统
         cnd = getPlayerSysMailCnd(characterId)
-    elif mtype ==2:
+    elif mtype ==2:  # 好友
         cnd = getPlayerFriMailCnd(characterId)
-    elif mtype ==3:
+    elif mtype ==3:  # 保存
         cnd = getPlayerSavMailCnd(characterId)
     return cnd
     
 def getPlayerAllMailCnd(characterId):
     '''获取玩家所有邮件的数量'''
+    # isSaved = 0
     sql = "SELECT COUNT(`id`) FROM tb_mail WHERE receiverId = %d and isSaved = 0"%characterId
     conn = dbpool.connection()
     cursor = conn.cursor()
@@ -75,7 +76,8 @@ def getPlayerAllMailCnd(characterId):
     return result[0]
 
 def getPlayerFriMailCnd(characterId):
-    '''获取角色玩家邮件的数量'''
+    '''获取角色好友邮件的数量'''
+    # type = 1 好友
     sql = "SELECT COUNT(id) FROM tb_mail WHERE receiverId = %d AND `type`=1  and isSaved = 0"%characterId
     conn = dbpool.connection()
     cursor = conn.cursor()
@@ -87,6 +89,7 @@ def getPlayerFriMailCnd(characterId):
 
 def getPlayerSysMailCnd(characterId):
     '''获取角色系统邮件数量'''
+    # type = 0 系统
     sql = "SELECT COUNT(id) FROM tb_mail WHERE receiverId = %d AND `type`=0  and isSaved = 0"%characterId
     conn = dbpool.connection()
     cursor = conn.cursor()
@@ -97,7 +100,8 @@ def getPlayerSysMailCnd(characterId):
     return result[0]
 
 def getPlayerSavMailCnd(characterId):
-    '''获取保存邮件的数量'''
+    '''获取已保存邮件的数量'''
+    # isSaved = 1
     sql = "SELECT COUNT(id) FROM tb_mail WHERE receiverId = %d AND `isSaved`=1"%characterId
     conn = dbpool.connection()
     cursor = conn.cursor()
@@ -114,12 +118,14 @@ def getPlayerMailList(characterId):
     
 
 def getPlayerAllMailList(characterId):
-    '''获取角色邮件列表
+    '''获取角色所有邮件列表
     @param characterId: int 角色的id
     '''
-    filedList = ['id','sender','title','type','isReaded','sendTime']
+    filedList = ['id','sender','title','type','isReaded','sendTime'] # 多了sender，少了content
     sqlstr = ''
-    sqlstr = forEachQueryProps(sqlstr, filedList)
+    sqlstr = forEachQueryProps(sqlstr, filedList)  # 返回一个不完整 sql 语句
+    # 按照降序（未读、最近时间）排序
+    # isSaved = 0 表示未接收，可能是因为该玩家未上线
     sql = "select %s from `tb_mail` where receiverId = %d  and isSaved = 0\
      order by isReaded ,sendTime desc"%(sqlstr,characterId)
     conn = dbpool.connection()
@@ -128,24 +134,26 @@ def getPlayerAllMailList(characterId):
     result = cursor.fetchall()
     cursor.close()
     conn.close()
-    data = []
-    for mail in result:
+    data = []  # 邮件列表
+    for mail in result:  # 话说这里为什么不用 extend 呢？直接就可以全部放入了呀！
         mailInfo = {}
         for i in range(len(mail)):
             if filedList[i]=='sendTime':
-                mailInfo['sendTime'] = str(mail[i])
+                mailInfo['sendTime'] = str(mail[i])  # 为什么？？？这里 sendTime 有点不同，转换成string类型
             else:
-                mailInfo[filedList[i]] = mail[i]
+                mailInfo[filedList[i]] = mail[i]  # 其他属性正常
         data.append(mailInfo)
     return data
 
 def getPlayerSysMailList(characterId,page,limit):
-    '''获取角色邮件列表
+    '''获取系统邮件列表
     @param characterId: int 角色的id
     '''
-    filedList = ['id','title','type','isReaded','sendTime','content']
+    filedList = ['id','title','type','isReaded','sendTime','content'] # 多了content，少了sender
     sqlstr = ''
     sqlstr = forEachQueryProps(sqlstr, filedList)
+    # type = 0 表示 系统
+    # isSaved = 0 表示 未接收
     sql = "select %s from `tb_mail` where receiverId = %d and `type`=0  and isSaved = 0\
      order by isReaded,sendTime desc LIMIT %d,%d "%(sqlstr,characterId,(page-1)*limit,limit)
     conn = dbpool.connection()
@@ -163,12 +171,14 @@ def getPlayerSysMailList(characterId,page,limit):
     return data
 
 def getPlayerFriMailList(characterId,page,limit):
-    '''获取角色邮件列表
+    '''获取好友邮件列表
     @param characterId: int 角色的id
     '''
     filedList = ['id','title','type','isReaded','sendTime','content']
     sqlstr = ''
     sqlstr = forEachQueryProps(sqlstr, filedList)
+    # type = 1 表示 好友
+    # isSaved = 0 表示 未接收
     sql = "select %s from `tb_mail` where receiverId = %d and `type`=1  and isSaved = 0\
      order by isReaded LIMIT %d,%d "%(sqlstr,characterId,(page-1)*limit,limit)
     conn = dbpool.connection()
@@ -186,12 +196,14 @@ def getPlayerFriMailList(characterId,page,limit):
     return data
 
 def getPlayerSavMailList(characterId,page,limit):
-    '''获取角色邮件列表
+    '''获取已保存的邮件列表
     @param characterId: int 角色的id
     '''
     filedList = ['id','title','type','isReaded','sendTime','content']
     sqlstr = ''
     sqlstr = forEachQueryProps(sqlstr, filedList)
+    # isSaved = 1 表示 已接收
+    # page 页数 根据页数获取已保存的邮件 offset = (page-1) * rows   rows = limit
     sql = "select %s from `tb_mail` where receiverId = %d and `isSaved`=1\
      order by isReaded LIMIT %d,%d "%(sqlstr,characterId,(page-1)*limit,limit)
     conn = dbpool.connection()
@@ -220,9 +232,9 @@ def checkMail(mailId,characterId):
     result = cursor.fetchone()
     cursor.close()
     conn.close()
-    if result:
+    if result:  # 是
         return True
-    return False
+    return False  # 不是
 
 def getMailInfo(mailId):
     '''获取邮件详细信息'''
@@ -237,6 +249,9 @@ def getMailInfo(mailId):
     
 def updateMailInfo(mailId,prop):
     '''更新邮件信息'''
+    # 传来了prop，prop包含需要更新的键值
+    # 在 util.forEachUpdateProps 会格式化 sql 语句
+    # {'id':mailId} 是 用于 where 判断
     sql = util.forEachUpdateProps('tb_mail',prop, {'id':mailId})
     conn = dbpool.connection()
     cursor = conn.cursor()

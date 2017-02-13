@@ -1,0 +1,172 @@
+{"frames": {
+
+"bag.png":
+{
+	"frame": {"x":178,"y":301,"w":71,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":64},
+	"sourceSize": {"w":71,"h":64}
+},
+"bags.png":
+{
+	"frame": {"x":178,"y":228,"w":76,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":71},
+	"sourceSize": {"w":76,"h":71}
+},
+"buzhen.png":
+{
+	"frame": {"x":2,"y":164,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"buzhen1.png":
+{
+	"frame": {"x":2,"y":110,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"fanhuixiao.png":
+{
+	"frame": {"x":2,"y":404,"w":94,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":39},
+	"sourceSize": {"w":94,"h":39}
+},
+"fanhuixiao1.png":
+{
+	"frame": {"x":2,"y":341,"w":94,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":39},
+	"sourceSize": {"w":94,"h":39}
+},
+"jinbi.png":
+{
+	"frame": {"x":178,"y":367,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"quedinghuixiao.png":
+{
+	"frame": {"x":2,"y":300,"w":94,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":39},
+	"sourceSize": {"w":94,"h":39}
+},
+"quedingxiao.png":
+{
+	"frame": {"x":2,"y":259,"w":94,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":39},
+	"sourceSize": {"w":94,"h":39}
+},
+"quedingxiao1.png":
+{
+	"frame": {"x":2,"y":218,"w":94,"h":39},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":94,"h":39},
+	"sourceSize": {"w":94,"h":39}
+},
+"shangbukuang.png":
+{
+	"frame": {"x":98,"y":299,"w":78,"h":79},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":79},
+	"sourceSize": {"w":78,"h":79}
+},
+"shangbukuang2.png":
+{
+	"frame": {"x":98,"y":218,"w":78,"h":79},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":79},
+	"sourceSize": {"w":78,"h":79}
+},
+"tanchuqueding.png":
+{
+	"frame": {"x":2,"y":56,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"tanchuqueding1.png":
+{
+	"frame": {"x":2,"y":2,"w":188,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":52},
+	"sourceSize": {"w":190,"h":52}
+},
+"v5.png":
+{
+	"frame": {"x":192,"y":191,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"wupin.png":
+{
+	"frame": {"x":192,"y":154,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"x.png":
+{
+	"frame": {"x":192,"y":117,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"x1.png":
+{
+	"frame": {"x":192,"y":80,"w":35,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":35},
+	"sourceSize": {"w":35,"h":35}
+},
+"xingxinghui.png":
+{
+	"frame": {"x":192,"y":41,"w":36,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
+	"sourceSize": {"w":36,"h":37}
+},
+"xingxingliang.png":
+{
+	"frame": {"x":192,"y":2,"w":36,"h":37},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":37},
+	"sourceSize": {"w":36,"h":37}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "xiaobujian.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:61c6198aaa43c37b7e62ca23a945de0a:1/1$"
+}
+}

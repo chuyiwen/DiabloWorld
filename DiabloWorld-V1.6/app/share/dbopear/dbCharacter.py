@@ -13,8 +13,10 @@ from firefly.dbentrust import util
 def updatePlayerDB(player):
     '''更新角色的数据库信息'''
     characterId = player.baseInfo.id
+    # 将角色信息放入字典 level coin exp hp
     props = {'level':player.level.getLevel(),'coin':player.finance.getCoin(),
              'exp':player.level.getExp(),'hp':player.attribute.getHp()}
+    # 更新列表id对应数据库表的属性  这里使用 dbenbust的 util
     sqlstr = util.forEachUpdateProps('tb_character',props, {'id':characterId})
     conn = dbpool.connection()
     cursor = conn.cursor()

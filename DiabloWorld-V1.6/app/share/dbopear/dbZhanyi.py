@@ -24,11 +24,13 @@ def getAllZhanYiInfo():
     cursor.close()
     conn.close()
     for zhanyi in result:
-        ALL_ZHANYI_INFO[zhanyi['id']] = zhanyi
+        ALL_ZHANYI_INFO[zhanyi['id']] = zhanyi  # 所有的战役的信息
         
         
 def getAllZhangJieInfo():
     '''获取章节的信息
+    # id  章节的id
+    # yid 所属战役的id
     '''
     global ALL_ZHANGJIE_INFO,ALL_ZHANGJIE_GROP
     sql = "SELECT * FROM tb_zhangjie"
@@ -39,10 +41,10 @@ def getAllZhangJieInfo():
     cursor.close()
     conn.close()
     for zhangjie in result:
-        ALL_ZHANGJIE_INFO[zhangjie['id']] = zhangjie
+        ALL_ZHANGJIE_INFO[zhangjie['id']] = zhangjie  #所有章节的信息
         if not ALL_ZHANGJIE_GROP.get(zhangjie['yid']):
             ALL_ZHANGJIE_GROP[zhangjie['yid']] = []
-        ALL_ZHANGJIE_GROP[zhangjie['yid']].append(zhangjie['id'])
+        ALL_ZHANGJIE_GROP[zhangjie['yid']].append(zhangjie['id'])  # 战役与章节关系（所属战役的id -> 章节的id）
             
 
 

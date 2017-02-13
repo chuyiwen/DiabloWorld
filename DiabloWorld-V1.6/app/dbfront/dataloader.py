@@ -6,7 +6,7 @@ Created on 2013-8-14
 '''
 import memmode
 from firefly.dbentrust.madminanager import MAdminManager
-from app.share.mcharacter.McharacterManager import McharacterManager
+from app.share.mcharacter.McharacterManager import McharacterManager  # 自己写的
 from twisted.internet import reactor
 reactor = reactor
 

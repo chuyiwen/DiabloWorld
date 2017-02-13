@@ -70,7 +70,7 @@ class CharacterZhanYiComponent(Component):
     
     
     def getZhanYiInfo(self,index):
-        '''获取张角信息
+        '''获取战役信息
         '''
         if index ==0:
             zid = self.currentZJ

@@ -13,7 +13,7 @@ def getZhanYiInfo(dynamicId,characterId ,index):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':""}
-    zhanyiinfo = player.zhanyi.getZhanYiInfo(index)
+    zhanyiinfo = player.zhanyi.getZhanYiInfo(index)  # 获取战役信息
     return zhanyiinfo
 
 def zhangjieFight(dynamicId,characterId,zhangjieid):
@@ -22,7 +22,7 @@ def zhangjieFight(dynamicId,characterId,zhangjieid):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':""}
-    fightresult = player.zhanyi.doZhangJie(zhangjieid)
+    fightresult = player.zhanyi.doZhangJie(zhangjieid)  # 章节战斗
     return fightresult
 
 

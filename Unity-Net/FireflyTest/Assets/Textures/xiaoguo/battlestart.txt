@@ -1,0 +1,52 @@
+{"frames": {
+
+"s0.png":
+{
+	"frame": {"x":2,"y":786,"w":452,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":6,"w":452,"h":194},
+	"sourceSize": {"w":480,"h":206}
+},
+"s1.png":
+{
+	"frame": {"x":2,"y":590,"w":452,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":6,"w":452,"h":194},
+	"sourceSize": {"w":480,"h":206}
+},
+"s2.png":
+{
+	"frame": {"x":2,"y":394,"w":452,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":6,"w":452,"h":194},
+	"sourceSize": {"w":480,"h":206}
+},
+"s3.png":
+{
+	"frame": {"x":2,"y":198,"w":452,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":6,"w":452,"h":194},
+	"sourceSize": {"w":480,"h":206}
+},
+"s4.png":
+{
+	"frame": {"x":2,"y":2,"w":452,"h":194},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17,"y":6,"w":452,"h":194},
+	"sourceSize": {"w":480,"h":206}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "battlestart.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:01ee1e8e4b0aaa084a139f45fcd7ccd2:1/1$"
+}
+}

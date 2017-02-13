@@ -7,23 +7,24 @@ Created on 2012-5-21
 from app.game.core.PlayersManager import PlayersManager
 from app.share.dbopear import dbItems
 
+# 2109
 def GetCompoundPackage_2109(dynamicId,characterId):
     '''获取合成包裹的信息
     '''
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    response = player.pack.HuoQuSuiPianBaoguo()
+    response = player.pack.HuoQuSuiPianBaoguo()  # 获取包裹中的碎片信息
     return response
 
-    
+
 def GetOneItemInfo(dynamicId, characterId,itemid):
     '''获取单个物品的详细信息
     '''
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    response = player.pack.getOneItemInfo(itemid)
+    response = player.pack.getOneItemInfo(itemid)  # 获取单个物品的信息
     return response
 
     
@@ -33,11 +34,11 @@ def GetCompoundItem(dynamicId, characterId,tempid):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    suipianinfo = dbItems.all_ItemTemplate.get(tempid)
+    suipianinfo = dbItems.all_ItemTemplate.get(tempid)  # 根据id 从物品模板字典中获取 物品模板
     if not suipianinfo:
         return {'result':False,'message':u"碎片信息不存在"}
-    newtempid = suipianinfo.get('compound',0)
-    newiteminfo = dbItems.all_ItemTemplate.get(newtempid)
+    newtempid = suipianinfo.get('compound',0)  # 获取合成后的物品模板id
+    newiteminfo = dbItems.all_ItemTemplate.get(newtempid)  # 根据newid 从物品模板字典中获取 合成后的物品模板
     if not newiteminfo:
         return {'result':False,'message':u"该物品不能合成"}
     response = {}
@@ -55,7 +56,7 @@ def GetCompoundItem(dynamicId, characterId,tempid):
     info['price'] = newiteminfo['buyingRateCoin']
     info['stack'] = 1
     info['qh'] = 1 if newiteminfo['bodyType']>0 else 0
-    response['hcprice'] = suipianinfo.get('comprice',0)
+    response['hcprice'] = suipianinfo.get('comprice',0)  # 合成价值
     response['iteminfo'] = info
     return {'result':True,'message':u"",'data':response}
 
@@ -66,7 +67,7 @@ def CompoundItem(dynamicId, characterId, tempid):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    response = player.pack.CompoundItem(tempid)
+    response = player.pack.CompoundItem(tempid)  # 合成物品
     return response
 
 

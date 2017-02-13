@@ -22,6 +22,6 @@ def getProfession_Config():
     cursor.close()
     conn.close()
     for _item in result:
-        tb_Profession_Config[_item['preId']] = _item
+        tb_Profession_Config[_item['preId']] = _item  # 获取所有的职业模板信息
 
 

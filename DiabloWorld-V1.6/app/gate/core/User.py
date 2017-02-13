@@ -39,7 +39,7 @@ class User:
         if not data:
             self.isEffective = False
             return
-        if not data['enable']:
+        if not data['enable']:  # enable（是否可以登录）
             self.isEffective = False
         self.id = data.get('id',0)
         self.pid = data.get('pid',0)
@@ -62,7 +62,7 @@ class User:
         '''获取角色信息'''
         info = {}
         info['userId'] = self.id
-        info['defaultId'] = self.characterId
+        info['defaultId'] = self.characterId  # defaultId？？？characterId
         if not self.characterId:
             info['hasRole'] = False
         else:
@@ -89,26 +89,26 @@ class User:
         '''创建新角色
         @profession （int） 角色职业 （0 新手 1战士 2 法师 3 游侠 ）
         '''
-        if profession not in range(1,7):
+        if profession not in range(1,7):  # 7？不是 0 1 2 3 这四种可能吗？
             return {'result':False,'message':u'profession_error'}
-        if len(nickname)<2 or len(nickname)>20:
+        if len(nickname)<2 or len(nickname)>20:  # 用户名不合格
             return {'result':False,'message':u'yhm_buhege'}
-        if self.characterId:
+        if self.characterId:  # 已经创建角色
             return {'result':False,'message':u'yijingchuangjian'}
-        if not dbuser.checkCharacterName(nickname):
+        if not dbuser.checkCharacterName(nickname):  # 用户名已存在
             return {'result':False,'message':u'yhm_yicunzai'}
-        characterId = dbuser.creatNewCharacter(nickname, profession, self.id)
+        characterId = dbuser.creatNewCharacter(nickname, profession, self.id)  # 创建新角色
         if characterId:
             self.characterId = characterId
-            data = {}
+            data = {}  # 往字典写入信息
             data['userId'] = self.id
             data['newCharacterId'] = characterId
             cinfo = {'id':characterId,'level':1,
                      'profession':profession,
                      'nickname':nickname}
-            mcha = Mcharacter(characterId,'character%d'%characterId,mclient)
-            mcha.initData(cinfo)
-            mcha.insert()
+            mcha = Mcharacter(characterId,'character%d'%characterId,mclient)  # 初始化对象
+            mcha.initData(cinfo)  # 初始化数据
+            mcha.insert()  # 插入到数据库
             return {'result':True,'message':u'创建角色成功','data':data}
         else:
             return {'result':False,'message':u'创建角色失败'}
@@ -117,9 +117,10 @@ class User:
         '''断开'''
         from app.gate.gaterootapp.netforwarding import SavePlayerInfoInDB,pushObject
         dynamicId = self.dynamicId
-        SavePlayerInfoInDB(dynamicId)
+        SavePlayerInfoInDB(dynamicId)  # 将角色信息存储到数据库
         msg = u"您账户其他地方登录"
         self.isEffective = False
+        # pushObject 调用了 GlobalObject().root.callChild("net","pushObject",topicID,msg,sendList)  # 调用net
         pushObject(905,msg, [self.dynamicId])
     
             

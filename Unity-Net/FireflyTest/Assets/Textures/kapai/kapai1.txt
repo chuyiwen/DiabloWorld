@@ -1,0 +1,44 @@
+{"frames": {
+
+"qs_6000.png":
+{
+	"frame": {"x":377,"y":377,"w":373,"h":373},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":373,"h":373},
+	"sourceSize": {"w":375,"h":375}
+},
+"qs_6001.png":
+{
+	"frame": {"x":377,"y":2,"w":373,"h":373},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":373,"h":373},
+	"sourceSize": {"w":375,"h":375}
+},
+"qs_6002.png":
+{
+	"frame": {"x":2,"y":377,"w":373,"h":373},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":373,"h":373},
+	"sourceSize": {"w":375,"h":375}
+},
+"qs_6003.png":
+{
+	"frame": {"x":2,"y":2,"w":373,"h":373},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":373,"h":373},
+	"sourceSize": {"w":375,"h":375}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "kapai1.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:796d34fe0d26668c9165064ac36ca27d:1/1$"
+}
+}

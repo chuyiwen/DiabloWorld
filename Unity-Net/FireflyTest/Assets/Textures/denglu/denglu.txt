@@ -1,0 +1,92 @@
+{"frames": {
+
+"9s2-1.png":
+{
+	"frame": {"x":188,"y":942,"w":60,"h":76},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":76},
+	"sourceSize": {"w":60,"h":76}
+},
+"9s2-2.png":
+{
+	"frame": {"x":126,"y":942,"w":60,"h":76},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":76},
+	"sourceSize": {"w":60,"h":76}
+},
+"bgInputLogin.png":
+{
+	"frame": {"x":2,"y":804,"w":420,"h":136},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":420,"h":136},
+	"sourceSize": {"w":420,"h":136}
+},
+"bgLogin.png":
+{
+	"frame": {"x":2,"y":2,"w":480,"h":800},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":480,"h":800},
+	"sourceSize": {"w":480,"h":800}
+},
+"btnLogin.png":
+{
+	"frame": {"x":432,"y":906,"w":180,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":49},
+	"sourceSize": {"w":180,"h":49}
+},
+"btnLogin2.png":
+{
+	"frame": {"x":424,"y":855,"w":180,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":49},
+	"sourceSize": {"w":180,"h":49}
+},
+"btnStart.png":
+{
+	"frame": {"x":424,"y":804,"w":180,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":49},
+	"sourceSize": {"w":180,"h":49}
+},
+"btnStart2.png":
+{
+	"frame": {"x":250,"y":942,"w":180,"h":49},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":180,"h":49},
+	"sourceSize": {"w":180,"h":49}
+},
+"ff2-1.png":
+{
+	"frame": {"x":64,"y":942,"w":60,"h":76},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":76},
+	"sourceSize": {"w":60,"h":76}
+},
+"ff2-2.png":
+{
+	"frame": {"x":2,"y":942,"w":60,"h":76},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":76},
+	"sourceSize": {"w":60,"h":76}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "denglu.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8ad1e2774e05a88e6209abb139b98756:1/1$"
+}
+}

@@ -15,14 +15,14 @@ if __name__=="__main__":
     config = None
     if len(args)>2:
         servername = args[1];
-        config = json.load(open(args[2],'r'))
+        config = json.load(open(args[2],'r'))  # 读取 config.json 文件
     else:
         raise ValueError
     dbconf = config.get('db')
     memconf = config.get('memcached')
     sersconf = config.get('servers',{})
     masterconf = config.get('master',{})
-    serconfig = sersconf.get(servername)
+    serconfig = sersconf.get(servername)  # game1
     ser = FFServer()
     ser.config(serconfig, dbconfig=dbconf, memconfig=memconf,masterconf=masterconf)
     ser.start()

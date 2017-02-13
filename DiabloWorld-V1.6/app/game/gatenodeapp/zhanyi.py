@@ -7,8 +7,9 @@ Created on 2013-1-8
 from app.game.gatenodeservice import remoteserviceHandle
 import json
 
-from app.game.appinterface import zhanyi
+from app.game.appinterface import zhanyi  # 导入 zhanyi
 
+# 4500
 @remoteserviceHandle
 def GetNowZhanYiInfo_4500(dynamicId,request_proto):
     argument = json.loads(request_proto)
@@ -17,6 +18,7 @@ def GetNowZhanYiInfo_4500(dynamicId,request_proto):
     data = zhanyi.getZhanYiInfo(dynamicId, characterId, index)
     return json.dumps(data)
 
+# 4501
 @remoteserviceHandle
 def ZhangJieFight_4501(dynamicId,request_proto):
     '''江湖战斗

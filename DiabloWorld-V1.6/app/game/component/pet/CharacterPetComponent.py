@@ -84,12 +84,12 @@ class CharacterPetComponent(Component):
         return [pet.templateId for pet in self._pets.values()]
         
     def formatCharacterPetListInfo(self):
-        '''格式或角色的宠物信息'''
+        '''格式化角色的宠物信息'''
         pets = self.getPets()
         return pets.values()
     
     def FormatPetList(self):
-        '''格式货所有宠物的信息
+        '''格式化所有宠物的信息
         '''
         petinfolist = []
         pets = self.getPets()

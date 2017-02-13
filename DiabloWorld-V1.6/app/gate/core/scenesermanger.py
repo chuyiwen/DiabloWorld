@@ -15,7 +15,7 @@ class  SceneSer:
     
     def __init__(self,sceneId):
         self.id = sceneId
-        self._clients = set()
+        self._clients = set()  # 集合，去重
         
     def addClient(self,clientId):
         '''添加一个客户端到场景服务器'''
@@ -31,14 +31,15 @@ class  SceneSer:
 
 class SceneSerManager:
     
-    __metaclass__ = Singleton
+    __metaclass__ = Singleton  # 单例
     
     def __init__(self):
         '''初始化'''
-        self._scenesers = {}
+        self._scenesers = {}  # 保存场景服务器
         self.initSceneSers()
         
     def initSceneSers(self):
+        '''将所有场景服务器添加到场景管理类中'''
         for childname in GlobalObject().root.childsmanager._childs.keys():
             if "game" in childname:
                 self.addSceneSer(childname)
@@ -53,7 +54,7 @@ class SceneSerManager:
     def getSceneServerById(self,sceneId):
         '''返回场景服务的实例'''
         sceneser = self._scenesers.get(sceneId)
-        if not sceneser:
+        if not sceneser:  # 不存在就实例化一个场景服务器
             sceneser = self.addSceneSer(sceneId)
         return sceneser
         
@@ -80,10 +81,12 @@ class SceneSerManager:
         return sum([ser.getClientCnt() for ser in self._scenesers])
     
     
-    def getBsetScenNodeId(self):
+    def getBestScenNodeId(self):
         '''获取最佳的game服务器
         '''
+        # 获取场景服务器列表
         serverlist = self._scenesers.values()
+        # 最佳服务器就是当前人数最少的服务器 reverse = False 升序
         slist = sorted(serverlist,reverse=False,key = lambda sser:sser.getClientCnt())
         if slist:
             return slist[0].id

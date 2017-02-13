@@ -8,7 +8,6 @@ Created on 2011-3-28
 from app.game.component.baseInfo.ItemBaseInfoComponent import ItemBaseInfoComponent
 from app.game.component.attribute.ItemAttributeComponent import ItemAttributeComponent
 from app.game.component.pack.ItemPackComponent import ItemPackComponet
-from app.share.dbopear import dbItems
 from app.game.memmode import tbitemadmin
 import datetime
 
@@ -22,18 +21,18 @@ class Item(object):
         @param selfExtraAttributeId: []int list 物品自身附加属性
         @param dropExtraAttributeId: []int list 物品掉落时的附加属性 
         '''
-        self.baseInfo = ItemBaseInfoComponent(self,id,name,itemTemplateId)
-        self.attribute = ItemAttributeComponent(self)
-        self.pack = ItemPackComponet(self)
+        self.baseInfo = ItemBaseInfoComponent(self,id,name,itemTemplateId)  # 初始化物品基础信息
+        self.attribute = ItemAttributeComponent(self)  # 初始化物品附加属性
+        self.pack = ItemPackComponet(self)  # 物品在包裹中的组件属性
         self.exp = 0
         
     def initItemInstance(self,itemInstance):
         '''初始化实际物品信息
         '''
         self.exp = itemInstance['exp']
-        self.baseInfo.setItemTemplateId(itemInstance['itemTemplateId'])
-        self.attribute.setDurability(itemInstance['durability'])
-        self.pack.setStack(itemInstance['stack'])
+        self.baseInfo.setItemTemplateId(itemInstance['itemTemplateId'])  # 初始化基础属性
+        self.attribute.setDurability(itemInstance['durability'])   # 初始化耐久度
+        self.pack.setStack(itemInstance['stack'])  # 初始化物品层叠数？？？数量的意思吗？
                 
     def getWQtype(self):
         '''获取装备类型 #0=衣服#1=裤子 #2=头盔#3=手套#4=靴子#5=护肩#6=项链#7=戒指#8=主武器#9=副武器#10=双手'''
@@ -45,9 +44,9 @@ class Item(object):
         '''格式化物品信息'''
         data = self.baseInfo.getItemTemplateInfo() #字典类型
         if self.baseInfo.getItemFinalyPrice()>0:
-            data['buyingRateCoin'] = self.baseInfo.getItemFinalyPrice()
+            data['buyingRateCoin'] = self.baseInfo.getItemFinalyPrice()  # 获取物品的最终价格
         data['stack'] = self.pack.getStack()
-        data['templateId'] = self.baseInfo.getItemTemplateId()
+        data['templateId'] = self.baseInfo.getItemTemplateId()  # 获取物品模板Id
         if self.baseInfo.getId()!=0:
             data['id']= self.baseInfo.getId()
         else:
@@ -77,14 +76,14 @@ class Item(object):
         info['PhyAtt'] = data.get('basePhysicalAttack')
         info['PhyDef'] = data.get('basePhysicalDefense')
         info['MigAtt'] = data.get('baseMagicAttack')
-        info['MigAtt'] += self.attribute.extMagicAttack
+        info['MigAtt'] += self.attribute.extMagicAttack  # 附加属性
         info['MigDef'] = data.get('baseMagicDefense')
-        info['MigDef'] += self.attribute.extMagicDefense
+        info['MigDef'] += self.attribute.extMagicDefense  # 附加属性
         info['HitRate'] = data.get('baseHitAdditional')
         info['Dodge'] = data.get('baseDodgeAdditional')
         info['CriRate'] = data.get('baseCritAdditional')
         info['Speed'] = data.get('baseSpeedAdditional')
-        info['Speed'] += self.attribute.extSpeedAdditional
+        info['Speed'] += self.attribute.extSpeedAdditional  # 附加属性
         info['Block'] = data.get('baseBlockAdditional')
         info['Skill'] = [] if data.get('skill',0)==0 else [data.get('skill',0)]
         return info
@@ -94,7 +93,7 @@ class Item(object):
         if self.baseInfo.id:#已经存在物品的实例
             return
         itemTemplateId = self.baseInfo.itemTemplateId
-        isBound = 0
+        isBound = 0  # bound 0未绑定 1已绑定
         durability = 0
         stack = self.pack.getStack()
         data = {'characterId':characterId,
@@ -105,8 +104,8 @@ class Item(object):
                 'stack':stack,'strengthen':0,
                 'workout':0,'slot_1':0,'slot_2':0,
                 'slot_3':0,'slot_4':0,'exp':self.exp}
-        newitemmode = tbitemadmin.new(data)
-        itemId = int(newitemmode._name.split(':')[1])
+        newitemmode = tbitemadmin.new(data)  # 构造一个 item
+        itemId = int(newitemmode._name.split(':')[1])  # 获取 id
         self.baseInfo.setId(itemId)
         return itemId
     

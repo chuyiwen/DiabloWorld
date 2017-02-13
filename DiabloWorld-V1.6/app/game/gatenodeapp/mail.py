@@ -6,8 +6,9 @@ Created on 2013-7-17
 '''
 from app.game.gatenodeservice import remoteserviceHandle
 import json
-from app.game.appinterface import mail
+from app.game.appinterface import mail  # 导入 mail
 
+# 501
 @remoteserviceHandle
 def getMailList_501(dynamicId, request_proto):
     '''获取邮件列表'''
@@ -16,6 +17,7 @@ def getMailList_501(dynamicId, request_proto):
     data = mail.getMailList(dynamicId, characterId)
     return json.dumps(data)
 
+# 502
 @remoteserviceHandle
 def sendMail_502(dynamicId, request_proto):
     '''发送邮件'''
@@ -27,6 +29,7 @@ def sendMail_502(dynamicId, request_proto):
     data = mail.sendMail(dynamicId, characterId, playerName, title, content)
     return json.dumps(data)
 
+# 505
 @remoteserviceHandle
 def getMailInfo_505(dynamicId, request_proto):
     '''获取邮件内容'''

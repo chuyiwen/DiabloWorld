@@ -36,6 +36,7 @@ class ItemPackComponet(Component):
         return self._stack
     
     def setStack(self,stack):
+        '''设置物品层叠数'''
         self._stack = stack
         
     def updateStack(self,stack,tag=0):

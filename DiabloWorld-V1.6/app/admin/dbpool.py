@@ -9,6 +9,7 @@ from MySQLdb.cursors import DictCursor
 from Queue import Queue
 import MySQLdb
 
+
 class PoolException(Exception):
     pass
 
@@ -17,7 +18,7 @@ DBCS = {'mysql':MySQLdb.connect}
 
 class UCursor:
     '''自定义游标对象'''
-    
+
     def __init__(self,conn,cursorclass):
         '''
         @param conn: conn 数据库连接对象
@@ -27,56 +28,59 @@ class UCursor:
             self.cursor = conn.cursor(cursorclass=cursorclass)
         else:
             self.cursor = conn.cursor()
-        
+
     def execute(self,sql):
         '''语句执行
         @param sql: str sql 语句
         '''
-        count = self.cursor.execute(sql)
+        count = self.cursor.execute(sql)  # 单条插入
         return count
-    
+
     def executemany(self,sql,args):
         '''语句执行
         @param sql: str sql 语句
         '''
-        count = self.cursor.executemany(sql,args)
+        count = self.cursor.executemany(sql,args)  # 批量插入
         return count
-        
+
     def fetchall(self):
         '''获取所有游标对象中的数据'''
         return self.cursor.fetchall()
-    
+
     def fetchone(self):
         '''获取所有游标对象中的一条数据'''
         return self.cursor.fetchone()
-    
+
     def close(self):
         '''删除游标对象'''
         self.cursor.close()
         self.conn.close()
-        
+
 
 class DBPool(object):
-    '''''一个数据库连接池'''
-    
-    def initPool(self, maxActive=5, maxWait=None, init_size=1, db_type="mysql", **config):
+    '''一个数据库连接池'''
+
+    def initPool(self, maxActive=5, maxWait=None, init_size=1, db_type="mysql", **config):  # config 是字典
         '''初始化数据库连接池
+        @param maxActive: int 连接池的最大数据库连接数量。
+        @param maxWait: int 最大建立连接等待时间。如果超过此时间将接到异常。
+        @param init_size: int 连接池的初始数据库连接数量。
         '''
         log.msg("__init__ Pool..")
-        self.__freeConns = Queue(maxActive)
+        self.__freeConns = Queue(maxActive)  # Queue 容器
         self.maxWait = maxWait
         self.db_type = db_type
         self.config = config
-        if init_size > maxActive:
+        if init_size > maxActive:  # 最大不超过 maxActive
             init_size = maxActive
-        for i in range(init_size):
+        for i in range(init_size):  # 将初始化的连接放回池中
             self.free(self._create_conn())
         self.nowconn = None
-            
+
     def __del__(self):
         log.msg("__del__ Pool..")
         self.release()
-        
+
     def release(self):
         '''''释放资源，关闭池中的所有连接'''
         log.msg("release Pool..")
@@ -84,17 +88,17 @@ class DBPool(object):
             con = self.get()
             con.release()
             self.__freeConns = None
-            
+
     def _create_conn(self):
         '''''创建连接 '''
         if self.db_type in DBCS:
             return MySQLdb.connect(**self.config);
-            
+
     def get(self, timeout=None):
         '''''获取一个连接
         @param timeout:超时时间
         '''
-        if timeout is None:
+        if timeout is None:  # 默认超时时间为 maxWait
             timeout = self.maxWait
             conn = None
         if self.__freeConns.empty():#如果容器是空的，直接创建一个连接
@@ -103,14 +107,14 @@ class DBPool(object):
             conn = self.__freeConns.get(timeout=timeout)
             conn.pool = self
         return conn
-    
+
     def cursor(self,cursorclass = None):
         '''通配接口'''
-        conn = self.get()
-        self.nowconn = conn
+        conn = self.get()  # 获取一个连接
+        self.nowconn = conn  # 当前的连接
         ucur = UCursor( conn, cursorclass)
         return ucur
-    
+
     def commit(self):
         '''提交'''
         try:
@@ -124,7 +128,7 @@ class DBPool(object):
             self.nowconn.rollback()
         except Exception as e:
             log.err(e.message)
-    
+
     def free(self, conn):
         '''''将一个连接放回池中
         @param conn: 连接对象
@@ -133,13 +137,13 @@ class DBPool(object):
         if(self.__freeConns.full()):#如果当前连接池已满，直接关闭连接
             conn.release()
         return self.__freeConns.put_nowait(conn)
-    
+
     def execSql(self,sqlstr):
         '''执行数据库的写操作(插入,修改,删除)
         @param sqlstr: str 需要执行的sql语句
         '''
         try:
-            conn = self.get(5)
+            conn = self.get(5)  # 获取一个连接，超时间是5秒
             cursor = conn.cursor()
             count = cursor.execute(sqlstr)
             conn.commit()
@@ -152,13 +156,13 @@ class DBPool(object):
             log.err(err)
             conn.close()
             return None#通过放回NONE在远程调用上抛出异常
-    
+
     def execute(self,sqlstrList):
         '''批量处理sql语句并且支持事务回滚
         @param sqlstrList: list(str) 需要执行的sql语句list
         '''
         try:
-            conn = self.get(5)
+            conn = self.get(5)  # 获取一个连接，超时间是5秒
             cursor = conn.cursor()
             conn.autocommit(False)
             for sqlstr in sqlstrList:
@@ -177,11 +181,11 @@ class DBPool(object):
             conn.close()
             log.err(err)
             return False
-    
+
     def querySql(self,sqlstr,dictcursor = False):
         '''执行数据库的查询'''
         try:
-            conn = self.get(0)
+            conn = self.get(0)  # 获取一个连接，超时间是0秒
             if dictcursor:
                 cursor = conn.cursor(cursorclass=DictCursor)
             else:
@@ -195,4 +199,3 @@ class DBPool(object):
             log.err(err)
             conn.close()
             return None#通过放回NONE在远程调用上抛出异常
-        

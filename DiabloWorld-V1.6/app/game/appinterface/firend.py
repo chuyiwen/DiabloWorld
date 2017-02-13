@@ -15,7 +15,7 @@ def GetFriendList(dynamicId,characterId,tag,index):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':Lg().g(18)}
-    response = player.friend.getFriendTop(tag,index)
+    response = player.friend.getFriendTop(tag,index)  # 获取好友的排行信息
     return response
     
 
@@ -26,20 +26,20 @@ def GetSingleCharacterInfo(dynamicId,characterId,chtype,tid):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':Lg().g(18)}
-    if chtype in [1,2]:
-        return _getOtherCharacterInfo(tid)
-    else:
-        return _getOnePetInfo(characterId,tid)
+    if chtype in [1,2]:  # 角色自身或者好友
+        return _getOtherCharacterInfo(tid)  # 获取其他玩家的信息
+    else:  # 宠物
+        return _getOnePetInfo(characterId,tid)  # 获取宠物的信息
 
     
 def _getOnePetInfo(characterId,tid):
     '''获取宠物的信息
     '''
     player = PlayersManager().getPlayerByID(characterId)
-    pet = player.pet.getPet(tid)
+    pet = player.pet.getPet(tid)  # 获取指定的宠物
     if not pet:
         return {'result':False,'message':u'该宠物信息不存在'}
-    info = pet.formatInfoForWeiXin()
+    info = pet.formatInfoForWeiXin()  # 格式化角色信息
     return {'result':True,'message':u'','data':info}
     
     
@@ -49,31 +49,31 @@ def _getOtherCharacterInfo(tid):
     player = PlayersManager().getPlayerByID(tid)
     if not player:
         try:
-            player = PlayerCharacter(tid)
+            player = PlayerCharacter(tid)  # 根据id构造玩家
         except:
             player = None
     if not player:
         return {'result':False,'message':u'该角色信息不存在'}
-    info = player.formatInfoForWeiXin()
+    info = player.formatInfoForWeiXin()  # 格式化角色信息
     return {'result':True,'message':u'','data':info}
     
     
 def GuYongHaoYou(dynamicId,characterId,tid):
     '''雇佣好友
     '''
-    player = PlayersManager().getPlayerByID(characterId)
+    player = PlayersManager().getPlayerByID(characterId)  # 根据角色id获取玩家角色实例
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':Lg().g(18)}
-    response = player.friend.GuYongHaoYou(tid)
+    response = player.friend.GuYongHaoYou(tid)  # 雇用好友
     return response
     
 def getGuyongRecord(dynamicId,characterId):
     '''获取雇用记录
     '''
-    player = PlayersManager().getPlayerByID(characterId)
+    player = PlayersManager().getPlayerByID(characterId)  # 根据角色id获取玩家角色实例
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':Lg().g(18)}
-    response = player.friend.GetGuyongRecord()
+    response = player.friend.GetGuyongRecord()  # 获取雇用记录
     return response
     
     

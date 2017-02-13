@@ -15,14 +15,14 @@ def doWhenStop():
     print "##############################"
     MAdminManager().checkAdmins()
     
-GlobalObject().stophandler = doWhenStop
+GlobalObject().stophandler = doWhenStop  # 停止时候的操作
     
 
 def loadModule():
 #     mclient.flush_all()
-    registe_madmin()
-    initData()
-    CheckMemDB(1800)
+    registe_madmin()  # 注册数据库与memcached对应
+    initData()  # 载入角色初始数据
+    CheckMemDB(1800)  # 同步内存数据到数据库
     
     
     

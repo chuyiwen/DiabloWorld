@@ -49,14 +49,14 @@ class StateBuffer(object):
     def addStack(self):
         '''添加一层堆叠'''
         self.traceCD = self.format['traceCD']
-        if self.stack>=self.getMaxStack():
+        if self.stack>=self.getMaxStack():  # 超过最大堆叠
             return False
         self.stack +=1
         return True
     
     def setStack(self,stack):
         '''设置buff的最大堆叠数'''
-        if stack>self.getMaxStack():
+        if stack>self.getMaxStack():  # 超过最大堆叠
             return False
         return True
     
@@ -80,14 +80,14 @@ class StateBuffer(object):
     
     def getCanReplaceBuffList(self):
         '''获取可以清除的Buff 列表'''
-        return eval('['+self.format['replaceBuff']+']')
+        return eval('['+self.format['replaceBuff']+']')  # 获得可以清除的buff列表
     
     def getBuffEffect(self,actor,enemy):
         '''获取buff或者debuff效果'''
         effectFormula = self.format['buffEffects'].get('effectFormula','')
         exec(effectFormula)
-        if self.hasTriggered(enemy):
-            enemy = self.getTriggeredBuffEffect(actor, enemy)
+        if self.hasTriggered(enemy):  # 判断被动效果是否被触发
+            enemy = self.getTriggeredBuffEffect(actor, enemy)  # 获取被触发后的buff或debuff效果
         return enemy
     
     def getdotHotEffect(self,actor,enemy):

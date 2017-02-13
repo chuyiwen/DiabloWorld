@@ -13,8 +13,9 @@ from handle import OperaPlayer,DayRecored,Statistics
  
 def loadModule():
     root = vhost.NameVirtualHost()
-    root.putChild('opera', OperaPlayer())#在浏览器地址栏输入http://localhost:2012/opera?username=xx&opera_str=xxx  username是要操作的账号  opera_str是要操作的脚本
-    root.putChild('dayrecored', DayRecored())
-    root.putChild('statistics', Statistics())#statistics单服总数据
+    #在浏览器地址栏输入http://localhost:2012/opera?username=xx&opera_str=xxx  （username是要操作的账号  opera_str是要操作的脚本）
+    root.putChild('opera', OperaPlayer())
+    root.putChild('dayrecored', DayRecored())#datarecorded获取每日的记录
+    root.putChild('statistics', Statistics())#statistics获取单服总数据
     reactor.listenTCP(2012,Site(root))
     

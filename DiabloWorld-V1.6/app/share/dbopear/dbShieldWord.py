@@ -8,6 +8,8 @@ from firefly.dbentrust.dbpool import dbpool
 
 SHIELDWORD = []
 
+# 获取所有屏蔽词
+# id  sword（屏蔽词）
 def getAll_ShieldWord():
     global SHIELDWORD
     sql = "SELECT sword FROM tb_shieldword;"
@@ -24,7 +26,7 @@ def checkIllegalChar(chars):
     @param chars: str 源字符
     '''
     for word in SHIELDWORD:
-        if chars.find(word[0])!=-1:
+        if chars.find(word[0])!=-1:  # 含有屏蔽词
             return False
     return True
 
@@ -33,7 +35,7 @@ def replaceIllegalChar(chars):
     @param chars: str 源字符
     '''
     for word in SHIELDWORD:
-        chars = chars.replace(word[0],'*'*len(word[0]))
+        chars = chars.replace(word[0],'*'*len(word[0]))  # 用 * 替换屏蔽词
     return chars
 
 

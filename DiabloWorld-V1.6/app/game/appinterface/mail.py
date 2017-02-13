@@ -14,7 +14,7 @@ def getMailList(dynamicId,characterId):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    mailListInfo = player.mail.getMailList()
+    mailListInfo = player.mail.getMailList()  # 获取角色邮件列表
     return {'result':True,'data':mailListInfo}
 
 def getMailInfo(dynamicId,characterId,mailID):
@@ -25,7 +25,7 @@ def getMailInfo(dynamicId,characterId,mailID):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    mailInfo = player.mail.readMail(mailID)
+    mailInfo = player.mail.readMail(mailID)  # 阅读邮件（并将邮件未读状态改为以读状态）
     return mailInfo
 
 def SaveAndDeleteMail(dynamicId,characterId,setType,requestInfo,mailId,responseMailType):
@@ -38,17 +38,17 @@ def SaveAndDeleteMail(dynamicId,characterId,setType,requestInfo,mailId,responseM
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    if setType ==0:
+    if setType ==0:  # 保存
         result = player.mail.saveMail(requestInfo)
-    elif setType==1:
+    elif setType==1:  # 删除单条数据
         result = player.mail.deleteMail(requestInfo)
-    else:
+    else:  # 删除一页数据
         result = player.mail.BatchDelete(mailId)
     if result['result']:
-        pgcnd = player.mail.getPageCnd(responseMailType)
+        pgcnd = player.mail.getPageCnd(responseMailType)  # 获取总页码
         result['data']={}
         result['data']['maxPage'] = pgcnd
-        result['data']['setTypeResponse'] = setType
+        result['data']['setTypeResponse'] = setType  # 操作类型
     return result
 
 def sendMail(dynamicId,characterId,playerName,title,content):
@@ -62,18 +62,18 @@ def sendMail(dynamicId,characterId,playerName,title,content):
     player = PlayersManager().getPlayerByID(characterId)
     if not player or not player.CheckClient(dynamicId):
         return {'result':False,'message':u""}
-    if not dbShieldWord.checkIllegalChar(title):
+    if not dbShieldWord.checkIllegalChar(title):  # 查询 title 是否存在屏蔽词
         return {'result':False,'message':u""}
-    if not dbShieldWord.checkIllegalChar(content):
+    if not dbShieldWord.checkIllegalChar(content):  # 查询 content 是否存在屏蔽词
         return {'result':False,'message':u""}
-    if len(title)>12:
+    if len(title)>12:  # 标题长度限制
         return {'result':False,'message':u""}
-    toId = dbCharacter.getCharacterIdByNickName(playerName)
+    toId = dbCharacter.getCharacterIdByNickName(playerName)  # 根据昵称获取 角色（发信人） 的id
     if not toId:
         return {'result':False,'message':u""}
     if toId[0]==characterId:
         return {'result':False,'message':u""}
-    result = player.mail.sendMail(toId[0],title,content)
+    result = player.mail.sendMail(toId[0],title,content)  # 发送邮件（这里是保存到数据库，只有当收信人打开邮箱，才会收到从服务器更新）
     if  result:
         return {'result':True,'message':u""}
     return {'result':False,'message':u""}

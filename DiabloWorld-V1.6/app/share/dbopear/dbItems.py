@@ -23,7 +23,7 @@ def getAll_ItemTemplate():
     cursor.close()
     conn.close()
     for _item in result:
-        all_ItemTemplate[_item['id']] = _item
+        all_ItemTemplate[_item['id']] = _item  # 获取所有的物品模板信息
 
 def getAllsetInfo():
     '''获取所有的套装信息
@@ -37,5 +37,5 @@ def getAllsetInfo():
     cursor.close()
     conn.close()
     for setinfo in result:
-        ALL_SETINFO[setinfo['id']] = setinfo
+        ALL_SETINFO[setinfo['id']] = setinfo  # 获取所有的套装信息
 

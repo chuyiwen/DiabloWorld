@@ -9,14 +9,15 @@ from app.game.core.character.PlayerCharacter import PlayerCharacter
 from app.game.core.PlayersManager import PlayersManager
 
 
-
+# 601
 @remoteserviceHandle
 def enterPlace_601(dynamicId, characterId, placeId,force,player):
     '''进入场景'''
     if not player:
         player = PlayerCharacter(characterId,dynamicId = dynamicId)
-    PlayersManager().addPlayer(player)
+    PlayersManager().addPlayer(player)  # 添加一个在线角色
     playerinfo = player.formatInfo()
+    # 返回客户端人物状态数据
     responsedata = {'result':True,'message':'',
                     'data':{'cid':playerinfo['id'],
                             'name':playerinfo['nickname'],

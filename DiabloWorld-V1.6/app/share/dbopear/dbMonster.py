@@ -21,7 +21,7 @@ def getAllMonsterInfo():
     cursor.close()
     conn.close()
     for monster in result:
-        All_MonsterInfo[monster['id']] = monster
+        All_MonsterInfo[monster['id']] = monster  # 获取所有的怪物模板信息
         
         
 

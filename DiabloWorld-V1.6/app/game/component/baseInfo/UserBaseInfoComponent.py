@@ -4,7 +4,7 @@ Created on 2011-3-23
 
 @author: sean_lan
 '''
-from component.baseInfo.BaseInfoComponent import BaseInfoComponent
+from app.game.component.baseInfo.BaseInfoComponent import BaseInfoComponent
 
 class UserBaseInfoComponent(BaseInfoComponent):
     '''用户基础信息组件类'''

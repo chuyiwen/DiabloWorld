@@ -13,15 +13,15 @@ class PlayersManager:
 
     def __init__(self):
         '''初始化单例管理器'''
-        self._players = {}
+        self._players = {}  # 当前在线的玩家
     
     def getAll(self):
-        alllist=self._players.values()
+        alllist=self._players.values()  # 获取当前在线的玩家列表
         return alllist
     
     def addPlayer(self, player):
         '''添加一个在线角色'''
-        if self._players.has_key(player.baseInfo.id):
+        if self._players.has_key(player.baseInfo.id):  # 当前已存在角色（重复上线）
 #            raise Exception("系统记录冲突")
             pass
         self._players[player.baseInfo.id] = player
@@ -70,11 +70,6 @@ class PlayersManager:
     def IsPlayerOnline(self,pid):
         '''判断角色是否在线'''
         return self._players.has_key(pid)
-    
-    def doPlayerOffLine(self,player):
-        '''
-        '''
-        pass
     
     
     

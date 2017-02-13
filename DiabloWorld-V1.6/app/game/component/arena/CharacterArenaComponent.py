@@ -13,8 +13,8 @@ MAXTIMES = 10
 def getTimeStrByTimedelta(lasttime):
     '''根据时间差获取时间字符创
     '''
-    delta = datetime.datetime.now()-lasttime
-    deltasecond = delta.days*86400+delta.seconds
+    delta = datetime.datetime.now()-lasttime  # 差
+    deltasecond = delta.days*86400+delta.seconds  # 转换成秒
     deltastr = ''
     if deltasecond<60:
         deltastr = u"刚刚，"

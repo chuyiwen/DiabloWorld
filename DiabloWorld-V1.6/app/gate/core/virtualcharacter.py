@@ -18,7 +18,7 @@ class VirtualCharacter:
         self.dynamicId = dynamicId
         self.node = node
         self.locked = False
-        self.famId = 0
+        self.famId = 0  # 副本id
         
     def getLocked(self):
         '''获取角色的锁定状态'''
